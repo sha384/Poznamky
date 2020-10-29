@@ -1,8 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Poznamky.MainPage">
+             x:Class="Poznamky.MainPage"
+             Title="Poznámky">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Přidat"
+                     Clicked="ToolbarItem_Clicked" />
+    </ContentPage.ToolbarItems>
+    <ListView x:Name="list"
+              ItemSelected="list_ItemSelected">
 
-    
-
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell x:Name="{Binding ID}" 
+                          Text="{Binding Name}" 
+                          Detail="{Binding Creation_Date, StringFormat='Datum vytvoření: {0:dd.MM.yyyy HH:mm}'}" TextColor="Black" />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>

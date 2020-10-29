@@ -17,6 +17,6 @@ namespace Poznamky.Model
 
         public DateTime Creation_Date { get; set; }
 
-        public DateTime Edit_Date { get; set; }
+        public DateTime? Edit_Date { get; set; }
     }
 }

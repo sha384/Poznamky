@@ -7,11 +7,11 @@ using SQLite;
 
 namespace Poznamky.Database
 {
-    class Database
+    class Db
     {
         private SQLiteConnection db;
 
-        public Database()
+        public Db()
         {
             db = new SQLiteConnection(
                 Path.Combine(
@@ -19,6 +19,8 @@ namespace Poznamky.Database
                     "poznamky.db3"
                 )
             );
+
+            db.CreateTable<Note>();
         }
 
         public TableQuery<Note> getAll()
@@ -37,19 +39,21 @@ namespace Poznamky.Database
 
             note.Name = name;
             note.Text = text;
-            note.Creation_Date = new DateTime();
+            note.Creation_Date = DateTime.Now;
+            note.Edit_Date = null;
 
             return db.Insert(note);
         }
 
-        public int edit(int id, string name, string text)
+        public int edit(int id, string name, string text, DateTime creation_date)
         {
             Note note = new Note();
 
             note.ID = id;
             note.Name = name;
             note.Text = text;
-            note.Edit_Date = new DateTime();
+            note.Creation_Date = creation_date;
+            note.Edit_Date = DateTime.Now;
 
             return db.Update(note);
         }
